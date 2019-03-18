@@ -9,10 +9,15 @@
 
 	function showLightbox() {
 		lightBox.classList.add("show-lightbox");
+		video.play();
 	}
 
 	function hideLightbox() {
 		lightBox.classList.remove("show-lightbox");
+
+		// Rewind the video to the beginning and pause it
+		video.currentTime = 0;
+		video.pause();
 	}
 
 	shields.forEach(shield => shield.addEventListener("click", showLightbox));
