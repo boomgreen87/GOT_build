@@ -37,8 +37,10 @@
 
 		// This is the total distance the images need to move as a pixel value
 		// data.offset is coming from each shield we click on.
-		totalOffset = this.dataset.offset * offSet + "px";
-		banners.style.right = totalOffset;
+		totalOffset = this.dataset.offset * offSet; // + "px";
+		
+		// GreenSock animation
+		TweenMax.to(banners, 0.8, {right: totalOffset});
 	}
 
 	// shields.forEach(shield => shield.addEventListener("click", showLightbox));
