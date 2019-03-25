@@ -31,10 +31,10 @@
 		[`ARRYN`, `House Arryn of the Eyrie is one of the Great Houses of Westeros. It has ruled over the Vale of Arryn for millennia, originally as the Kings of Mountain and Vale and more recently as Lords Paramount of the Vale and Wardens of the East under the Targaryen kings and Baratheon-Lannister kings. The nominal head of House Arryn is Robin Arryn, the Lord of the Eyrie, with his stepfather Petyr Baelish acting as Lord Protector until he reaches the age of majority.`]
 	];
 
-	function showLightbox() {
+	function showLightbox(shield) {
 		// Grab the right video source
 		// Get the lowercase house name from the class list
-		let targetHouse = this.className.split(" ")[1];
+		let targetHouse = shield.className.split(" ")[1];
 
 		// Make sure the names match - needs to be uppercase
 		// stark become Stark => First make capital S then add ark (for any class name)
@@ -69,6 +69,8 @@
 		
 		// GreenSock animation
 		TweenMax.to(banners, 0.8, {right: totalOffset});
+
+		showLightbox(this);
 	}
 
 	// Sets initial house name and information
