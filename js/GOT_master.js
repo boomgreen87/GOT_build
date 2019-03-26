@@ -41,12 +41,23 @@
 		let targetSrc = targetHouse.charAt(0).toUpperCase() + targetHouse.slice(1);
 		video.src = `video/House-${targetSrc}.mp4`;
 
+		// Shows lightbox
 		lightBox.classList.add("show-lightbox");
-		video.load();
-		video.play();
+
+		// Fades lightbox in
+		TweenMax.from(lightBox, 0.5, {opacity: 0, scaleX: 0, scaleY: 0, y: -340, delay: 0.3});
+	}
+
+	function fadeOutLightbox() {
+		// Fades lightbox out
+		TweenMax.to(lightBox, 0.25, {opacity: 0, onComplete: hideLightbox});
 	}
 
 	function hideLightbox() {
+		// Restores lightbox opacity
+		TweenMax.to(lightBox, 0, {opacity: 1});
+
+		// Hides lightbox
 		lightBox.classList.remove("show-lightbox");
 
 		// Rewind the video to the beginning and pause it
@@ -65,22 +76,24 @@
 		houseName.textContent = `House ${houseData[this.dataset.offset][0]}`;
 
 		// Change the house info
-		houseInfo.textContent = `House ${houseData[this.dataset.offset][1]}`;
+		houseInfo.textContent = `${houseData[this.dataset.offset][1]}`;
+
+		// Fades text in on change
+		TweenMax.from(houseName, 0.25, {opacity: 0, scaleX: 3, scaleY: 3});
+		TweenMax.from(houseInfo, 0.5, {opacity: 0, delay: 0.25});
 		
 		// GreenSock animation
-		TweenMax.to(banners, 0.8, {right: totalOffset});
-
-		showLightbox(this);
+		TweenMax.to(banners, 1, {right: totalOffset, onComplete: showLightbox, onCompleteParams: [this]});
 	}
 
 	// Sets initial house name and information
 	houseName.textContent = `House ${houseData[0][0]}`;
-	houseInfo.textContent = `House ${houseData[0][1]}`;
+	houseInfo.textContent = `${houseData[0][1]}`;
 
 	// shields.forEach(shield => shield.addEventListener("click", showLightbox));
 	shields.forEach(shield => shield.addEventListener("click", animateBanner));
 
-	video.addEventListener("ended", hideLightbox);
-
-	closeLB.addEventListener("click", hideLightbox);
+	// Listen for end of video or click on x to close lightbox
+	video.addEventListener("ended", fadeOutLightbox);
+	closeLB.addEventListener("click", fadeOutLightbox);
 })();
