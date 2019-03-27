@@ -3,13 +3,19 @@
 
 	// Variable stack
 	// Grab the shields at the bottom of the page
-	const 	shields		= document.querySelectorAll('.sigil-container'),
-			lightBox 	= document.querySelector('.lightbox'),
-			video		= document.querySelector('video'),
-			closeLB		= document.querySelector('.lightbox-close'),
-			banners 	= document.querySelector('#houseImages'),
-			houseName	= document.querySelector('.house-name'),
-			houseInfo	= document.querySelector('.house-info');
+	const 	shields				= document.querySelectorAll('.sigil-container'),
+			lightBox 			= document.querySelector('.lightbox'),
+			video				= document.querySelector('video'),
+			playButton 			= document.querySelector('.play'),
+			pauseButton 		= document.querySelector('.pause'),
+			rewindButton		= document.querySelector('.rewind'),
+			fastForwardButton 	= document.querySelector('.fastForward'),
+			volume 				= document.querySelector('.volume'),
+			volumeSet			= document.querySelector('.volumeSet'),
+			closeLB				= document.querySelector('.lightbox-close'),
+			banners 			= document.querySelector('#houseImages'),
+			houseName			= document.querySelector('.house-name'),
+			houseInfo			= document.querySelector('.house-info');
 
 	const houseData = [
 		[`STARK`, `House Stark of Winterfell is a Great House of Westeros, ruling over the vast region known as the North from their seat in Winterfell. It is one of the oldest lines of Westerosi nobility by far, claiming a line of descent stretching back over eight thousand years. Before the Targaryen conquest, as well as during the War of the Five Kings and Daenerys Targaryen's invasion of Westeros, the leaders of House Stark ruled over the region as the Kings in the North.`],
@@ -31,6 +37,7 @@
 		[`ARRYN`, `House Arryn of the Eyrie is one of the Great Houses of Westeros. It has ruled over the Vale of Arryn for millennia, originally as the Kings of Mountain and Vale and more recently as Lords Paramount of the Vale and Wardens of the East under the Targaryen kings and Baratheon-Lannister kings. The nominal head of House Arryn is Robin Arryn, the Lord of the Eyrie, with his stepfather Petyr Baelish acting as Lord Protector until he reaches the age of majority.`]
 	];
 
+	// Shows lightbox
 	function showLightbox(shield) {
 		// Grab the right video source
 		// Get the lowercase house name from the class list
@@ -45,14 +52,48 @@
 		lightBox.classList.add("show-lightbox");
 
 		// Fades lightbox in
-		TweenMax.from(lightBox, 0.5, {opacity: 0, scaleX: 0, scaleY: 0, y: -340, delay: 0.3});
+		TweenMax.from(lightBox, 0.5, {opacity: 0, scaleX: 0, scaleY: 0, y: -340, delay: 0.3, onComplete: playVideo});
 	}
 
+	// Plays video and changes play button to pause button
+	function playVideo() {
+		if (playButton.classList.contains('show')) {
+			playButton.classList.toggle('show');
+			pauseButton.classList.toggle('show');
+		}
+		video.play();
+	}
+
+	// Pauses video and changes pause button to play button
+	function pauseVideo() {
+		playButton.classList.toggle('show');
+		pauseButton.classList.toggle('show');
+		video.pause();
+	}
+
+	// Jumps to beginning of the video
+	function rewindVideo() {
+		video.currentTime = 0;
+	}
+
+	// Jumps to end of the video
+	function fastForwardVideo() {
+		video.currentTime = video.duration;
+	}
+
+	// Changes and displays volume
+	function changeVolume(value) {
+		video.volume = value * 0.01;
+		volumeSet.textContent = `Volume: ${value}`;
+	}
+
+	// Fades out the lightbox
 	function fadeOutLightbox() {
 		// Fades lightbox out
 		TweenMax.to(lightBox, 0.25, {opacity: 0, onComplete: hideLightbox});
 	}
 
+	// Hides the lightbox
 	function hideLightbox() {
 		// Restores lightbox opacity
 		TweenMax.to(lightBox, 0, {opacity: 1});
@@ -65,6 +106,7 @@
 		video.pause();
 	}
 
+	// Animates the banner
 	function animateBanner() {
 		const offSet = 600; // This is the offset / width of one banner
 
@@ -90,8 +132,20 @@
 	houseName.textContent = `House ${houseData[0][0]}`;
 	houseInfo.textContent = `${houseData[0][1]}`;
 
-	// shields.forEach(shield => shield.addEventListener("click", showLightbox));
+	// Sets wheels in motion for opening video when shield is clicked
 	shields.forEach(shield => shield.addEventListener("click", animateBanner));
+
+	// Change the volume of the video
+	changeVolume(volume.value);
+	volume.addEventListener("input", function(){ changeVolume(volume.value) });
+
+	// Go to beginning or end of video
+	rewindButton.addEventListener("click", rewindVideo);
+	fastForwardButton.addEventListener("click", fastForwardVideo);
+
+	// Pause / play the video
+	pauseButton.addEventListener("click", pauseVideo);
+	playButton.addEventListener("click", playVideo);
 
 	// Listen for end of video or click on x to close lightbox
 	video.addEventListener("ended", fadeOutLightbox);
