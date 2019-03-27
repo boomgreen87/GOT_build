@@ -48,7 +48,22 @@
     <span class="lightbox-close">X</span>
 
     <!-- Video -->
-    <video src="video/House-Stark.mp4" muted autoplay controls></video>
+    <video class="houseVideo" src="video/House-Stark.mp4"></video>
+
+    <!-- Video Controls -->
+    <div class="controls">
+        <div class="buttons">
+            <button class="rewind"></button>
+            <button class="pause"></button>
+            <button class="play show"></button>
+            <button class="fastForward"></button>
+        </div>
+
+        <div class="slider">
+            <input type="range" min="0" max="100" value="0" class="volume">
+            <p class="volumeSet"></p>
+        </div>
+    </div>
 </section>
 
 <script src="js/GOT_master.js"></script>
