@@ -1,71 +1,78 @@
 <!doctype html>
-<html>
-<head>
-<meta charset="UTF-8">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TimelineLite.min.js"></script>
-<title>Game of Thrones</title>
-<link href="css/meyerReset.css" rel="stylesheet" type="text/css" media="screen">
-<link href="css/GOT_master.css" rel="stylesheet" type="text/css" media="screen">
-</head>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TimelineLite.min.js"></script>
+        <title>Game of Thrones</title>
+        <link href="css/meyerReset.css" rel="stylesheet" type="text/css" media="screen">
+        <link href="css/GOT_master.css" rel="stylesheet" type="text/css" media="screen">
+    </head>
 
-<body>
-    <main>
+    <body>
+        <h1 class="hidden">Game Of Thrones</h1>
 
-    <section id="imageContainer">
-    	<div id="houseImages" style="right:0"> <!-- add in all of the images to make a scrolling "banner" -->
-    		<img src="images/stark.jpg"/>
-    		<img src="images/baratheon.jpg"/>
-    		<img src="images/lannister.jpg"/>
-    		<img src="images/tully.jpg"/>
-    		<img src="images/greyjoy.jpg"/>
-    		<img src="images/arryn.jpg"/>
-        </div>
-    </section>
+        <main>
+            <section id="imageContainer">
+                <h2 class="hidden">House Images</h2>
 
-    <nav id="bottomNav">
-    	<ul id="navList">
-        	<!-- custom data attribute, allowing to pass custom data https://developer.mozilla.org/en/docs/Web/API/HTMLElement/dataset -->
-            <li><div class="sigil-container stark" data-offset="0"></div></li>
-            <li><div class="sigil-container baratheon" data-offset="1"></div></li>
-            <li><div class="sigil-container lannister" data-offset="2"></div></li>
-            <li><div class="sigil-container tully" data-offset="3"></div></li>
-            <li><div class="sigil-container greyjoy" data-offset="4"></div></li>
-            <li><div class="sigil-container arryn" data-offset="5"></div></li>
-        </ul>
-    </nav>
+            	<div id="houseImages" style="right:0"> <!-- add in all of the images to make a scrolling "banner" -->
+            		<img src="images/stark.jpg" alt="House Stak"/>
+            		<img src="images/baratheon.jpg" alt="House Baratheon"/>
+            		<img src="images/lannister.jpg" alt="House Lannister"/>
+            		<img src="images/tully.jpg" alt="House Tully"/>
+            		<img src="images/greyjoy.jpg" alt="House Greyjoy"/>
+            		<img src="images/arryn.jpg" alt="House Arryn"/>
+                </div> <!-- End houseImages -->
+            </section> <!-- End imageContainer -->
 
-    <!-- replace this with the house name -->
-    <h1 class="house-name"></h1>
+            <nav id="bottomNav">
+                <h2 class="hidden">House Sigils</h2>
 
-    <!-- replace this with house details (github gist) -->
-    <p class="house-info"></p>
-</main>  <!--end mainContainer-->
+            	<ul id="navList">
+                	<!-- custom data attribute, allowing to pass custom data https://developer.mozilla.org/en/docs/Web/API/HTMLElement/dataset -->
+                    <li><div class="sigil-container stark" data-offset="0"></div></li>
+                    <li><div class="sigil-container baratheon" data-offset="1"></div></li>
+                    <li><div class="sigil-container lannister" data-offset="2"></div></li>
+                    <li><div class="sigil-container tully" data-offset="3"></div></li>
+                    <li><div class="sigil-container greyjoy" data-offset="4"></div></li>
+                    <li><div class="sigil-container arryn" data-offset="5"></div></li>
+                </ul> <!-- End navList -->
+            </nav> <!-- End bottomNav -->
 
-<!-- Add lightbox here -->
-<section class="lightbox">
-    <!-- Close Button -->
-    <span class="lightbox-close">X</span>
+            <!-- replace this with the house name -->
+            <h2 class="house-name">House Text</h2>
 
-    <!-- Video -->
-    <video class="houseVideo" src="video/House-Stark.mp4"></video>
+            <!-- replace this with house details (github gist) -->
+            <p class="house-info"></p>
+        </main>  <!--end mainContainer-->
 
-    <!-- Video Controls -->
-    <div class="controls">
-        <div class="buttons">
-            <button class="rewind"></button>
-            <button class="pause"></button>
-            <button class="play show"></button>
-            <button class="fastForward"></button>
-        </div>
+        <!-- Add lightbox here -->
+        <section class="lightbox">
+            <h2 class="hidden">Lightbox</h2>
 
-        <div class="slider">
-            <input type="range" min="0" max="100" value="0" class="volume">
-            <p class="volumeSet"></p>
-        </div>
-    </div>
-</section>
+            <!-- Close Button -->
+            <span class="lightbox-close">X</span>
 
-<script src="js/GOT_master.js"></script>
-</body>
+            <!-- Video -->
+            <video class="houseVideo" src="video/House-Stark.mp4"></video>
+
+            <!-- Video Controls -->
+            <div class="controls">
+                <div class="buttons">
+                    <button class="rewind"></button>
+                    <button class="pause show"></button>
+                    <button class="play"></button>
+                    <button class="fastForward"></button>
+                </div> <!-- End buttons -->
+
+                <div class="slider">
+                    <input class="volume" type="range" min="0" max="100" value="0">
+                    <p class="volumeSet"></p>
+                </div> <!-- End slider -->
+            </div> <!-- End controls -->
+        </section> <!-- End lightbox -->
+
+        <script src="js/GOT_master.js"></script>
+    </body>
 </html>

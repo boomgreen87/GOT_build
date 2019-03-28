@@ -58,16 +58,14 @@
 	// Plays video and changes play button to pause button
 	function playVideo() {
 		if (playButton.classList.contains('show')) {
-			playButton.classList.toggle('show');
-			pauseButton.classList.toggle('show');
+			toggleShow();
 		}
 		video.play();
 	}
 
 	// Pauses video and changes pause button to play button
 	function pauseVideo() {
-		playButton.classList.toggle('show');
-		pauseButton.classList.toggle('show');
+		toggleShow();
 		video.pause();
 	}
 
@@ -104,6 +102,11 @@
 		// Rewind the video to the beginning and pause it
 		video.currentTime = 0;
 		video.pause();
+
+		// If play button is showing on close, toggle pause button on instead so it appears upon opening a new video
+		if (playButton.classList.contains('show')) {
+			toggleShow();
+		}
 	}
 
 	// Animates the banner
@@ -126,6 +129,12 @@
 		
 		// GreenSock animation
 		TweenMax.to(banners, 1, {right: totalOffset, onComplete: showLightbox, onCompleteParams: [this]});
+	}
+
+	// Toggles whether the play or pause button is showing
+	function toggleShow() {
+		playButton.classList.toggle('show');
+		pauseButton.classList.toggle('show');
 	}
 
 	// Sets initial house name and information
